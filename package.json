@@ -1,6 +1,6 @@
 {
   "name": "classname-js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A JavaScript API for conditionally joining class names together.",
   "main": "index.js",
   "scripts": {
