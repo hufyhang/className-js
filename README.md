@@ -29,6 +29,17 @@ className('foo', 'bar'); // 'foo bar'
 
 className.js supports `string`, `number`, `boolean`, `array`, `object`, and even `function`.
 
+For `function`:
+
++ If the function returns `true`, the class name will be its corresponding property name, e.g.: `{hide: function () {return true}} // => 'hide'`
++ If function returns a `number` greater than zero, the class name will be its corresponding property name, e.g.: `{hide: function () {return 1}} // => 'hide'`
+
+For `number`:
+
+If the number is greater than zero:
++ when in an object, the class name will be its corresponding property name, e.g.: `{hide: 1} // => 'hide'`
++ otherwise, the class name will simply be the number. e.g.: `className(1) // => '1'`
+
 Below is a comprehensive example:
 
 ~~~js
