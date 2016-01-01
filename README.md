@@ -25,6 +25,21 @@ var className = require('classname-js');
 className('foo', 'bar'); // 'foo bar'
 ~~~
 
+##### Set classname of DOM elements
+
+__className.set(element, classnames...)__
+
+Set `element`'s classname according to `classnames` spec.
+
++ `element`: DOM element or CSS selector.
++ `classnames`: Class names spec, same as regular `className`.
+
+Example:
+
+~~~js
+className.set('section .btn', 'btn', 'bar'); // all `section .btn` will become 'btn bar'
+~~~
+
 ##### Supported types
 
 className.js supports `string`, `number`, `boolean`, `array`, `object`, and even `function`.

@@ -70,6 +70,50 @@
     return res.join(' ');
   };
 
+  var flatten = function flattern(array) {
+    array = slice.call(array);
+    var arr = [], item;
+    for (var i = 0, l = array.length; i !== l; ++i) {
+      item = array[i];
+      var type = toString.call(item);
+      if (type === '[object Array]' ||
+          type === '[object NodeList]') {
+        item = flatten(item);
+        arr = arr.concat(item);
+      }
+      else {
+        arr = arr.concat(item);
+      }
+    }
+    return arr;
+  };
+
+  // className.set(target, classNameArg1[, classNameArg2, ...])
+  className.set = function set(target) {
+    var args = slice.call(arguments);
+    if (args.length < 2) {
+      throw TypeError('className.set requires at least two parameters');
+    }
+
+    if (typeof target !== 'object' && typeof target !== 'string') {
+      throw TypeError(target + ' is neither an HTML element or a CSS selector string');
+    }
+
+    if (typeof document.querySelectorAll === 'undefined') {
+      throw TypeError('document.querySelectorAll is undefined');
+    }
+
+    var classes = className.apply(null, args.slice(1));
+    var elements = [];
+    elements = typeof target === 'string'
+                  ? elements.concat(document.querySelectorAll(target))
+                  : elements.concat(target);
+    elements = flatten(elements);
+    for (var i = 0, l = elements.length; i !== l; ++i) {
+      elements[i].className = classes;
+    }
+  };
+
   return className;
 })()
 
